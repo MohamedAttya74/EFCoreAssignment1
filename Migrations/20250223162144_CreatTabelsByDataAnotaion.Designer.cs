@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCoreAssignment1.Migrations
 {
     [DbContext(typeof(ITIDbContext))]
-    [Migration("20250223154248_CreateTablesDepartmentAndInstructorsAndstudentsAndTopics")]
-    partial class CreateTablesDepartmentAndInstructorsAndstudentsAndTopics
+    [Migration("20250223162144_CreatTabelsByDataAnotaion")]
+    partial class CreatTabelsByDataAnotaion
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,13 +34,18 @@ namespace EFCoreAssignment1.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseId"));
 
                     b.Property<int>("Crs_Duration")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Course_Duration");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Crs_Name");
 
                     b.Property<int>("Top_Id")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Top_Id");
 
                     b.HasKey("CourseId");
 
@@ -56,19 +61,29 @@ namespace EFCoreAssignment1.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DepartmentId"));
 
                     b.Property<string>("Dept_Desc")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Dept_Desc");
 
                     b.Property<string>("Dept_Location")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Dept_Location");
 
                     b.Property<int>("Dept_Manager")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Department_Manger");
 
                     b.Property<DateTime>("Manager_hiredate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Dept_Name");
 
                     b.HasKey("DepartmentId");
 
@@ -77,22 +92,29 @@ namespace EFCoreAssignment1.Migrations
 
             modelBuilder.Entity("EFCoreAssignment1.Models.Instructor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("Ins_Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Ins_Id"));
 
                     b.Property<string>("Ins_Degree")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Ins_Degree");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Ins_Name");
 
                     b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(10,2)")
+                        .HasColumnName("Ins_Salary");
 
-                    b.HasKey("Id");
+                    b.HasKey("Ins_Id");
 
                     b.ToTable("Instructors");
                 });
@@ -106,39 +128,52 @@ namespace EFCoreAssignment1.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Address");
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
                     b.Property<string>("Fname")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Fname");
 
                     b.Property<string>("Lname")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Lname");
 
                     b.Property<int>("Super")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Super");
 
                     b.HasKey("Id");
 
-                    b.ToTable("students");
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("EFCoreAssignment1.Models.Topic", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("Top_Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Top_Id"));
 
                     b.Property<string>("Top_Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Top_Name");
 
-                    b.HasKey("Id");
+                    b.HasKey("Top_Id");
 
-                    b.ToTable("Topics");
+                    b.ToTable("Topices");
                 });
 #pragma warning restore 612, 618
         }
